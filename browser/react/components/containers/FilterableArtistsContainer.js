@@ -1,31 +1,41 @@
 import React, { Component } from 'react';
 import FilterInput from '../FilterInput';
 import AllArtists from '../AllArtists';
+import axios from 'axios';
 
 export default class FilterableArtistsContainer extends Component {
 
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state = {
-      inputValue: ''
+      inputValue: '',
+      artists: []
     };
     this.handleInput = this.handleInput.bind(this);
   }
 
+  componentDidMount () {
+    axios.get('/api/artists')
+      .then(res => res.data )
+      .then(artists =>  this.setState({ artists }));
+  }
+
   handleInput(ev){
-    this.setState({ handleInput: this.ev.target.value });
+    ev.preventDefault();
+    this.setState({ inputValue: ev.target.value });
   }
 
   render () {
     const inputValue = this.state.inputValue;
-    console.log(`artists ${this.props.artists}`)
-    // const filteredArtists = this.props.artists.filter( artist =>{
-    //   artist.name.match(inputValue);
-    // });
+    console.log(inputValue)
+    const filteredArtists = this.state.artists.filter( artist =>
+      artist.name.match(inputValue)
+    );
+    console.log('---->',filteredArtists)
     return (
       <div>
         <FilterInput handleInput={this.handleInput}/>
-        <AllArtists /*artists={filteredArtists}*/ />
+        <AllArtists artists={filteredArtists} />
       </div>
     )
   }

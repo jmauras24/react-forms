@@ -6,6 +6,7 @@ import AllArtists from './AllArtists';
 import SingleArtist from './SingleArtist';
 import Sidebar from './Sidebar';
 import Player from './Player';
+import NewPlaylist from './Playlists';
 import FilterableArtistsContainer from './containers/FilterableArtistsContainer';
 
 export default class Main extends Component {
@@ -20,6 +21,7 @@ export default class Main extends Component {
           <div className="col-xs-10">
             <Switch>
               <Route exact path="/albums" component={StatefulAlbums} />
+              <Route exact path="/playlists" component={NewPlaylist} />
               <Route path="/albums/:albumId" component={SingleAlbum} />
               <Route exact path="/artists" component={FilterableArtistsContainer} />
               <Route path="/artists/:artistId" component={SingleArtist} />
