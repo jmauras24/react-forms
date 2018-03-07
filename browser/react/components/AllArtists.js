@@ -13,13 +13,18 @@ export default class AllArtists extends Component {
 
   componentDidMount () {
     axios.get('/api/artists')
-      .then(res => res.data)
-      .then(artists => this.setState({ artists }));
-  }
+      .then(res =>
+        res.data
+      )
+      .then(artists => {
+        this.setState({ artists })
+      });
+    }
 
-  render () {
+    render () {
 
-    const artists = this.state.artists;
+      const artists = this.state.artists;
+      console.log(`Artists: ${artists}`)
 
     return (
       <div>
